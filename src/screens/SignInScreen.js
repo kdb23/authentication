@@ -17,6 +17,7 @@ const SignInScreen = () => {
                 placeholder="Password" 
                 value={password} 
                 setValue={setPassword}
+                sercureTextEntry={true}
             />
         </View>
     )
