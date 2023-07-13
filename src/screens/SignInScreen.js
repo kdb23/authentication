@@ -7,6 +7,10 @@ const SignInScreen = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    const onSignInPress = () => {
+        console.warn("sign in");
+    }
+
     return (
         <View style={styles.root}>
             <CustomInput 
@@ -20,7 +24,7 @@ const SignInScreen = () => {
                 setValue={setPassword}
                 sercureTextEntry
             />
-            <CustomButton />
+            <CustomButton text="Sign In" onPress={onSignInPress} />
         </View>
     )
 };
