@@ -8,18 +8,17 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { AuthProvider } from './components/AuthContext';
-import { NavigationContainer } from '@react-navigation/native';
 import AppNav from './components/AppNav'
+import { DateProvider } from './components/DateContext';
 
 
 function App() {
   return (
+    <DateProvider>
     <AuthProvider >
-      <NavigationContainer>
         <AppNav />
-          <Text>Token Fun</Text>
-      </NavigationContainer>
     </AuthProvider>
+    </DateProvider>
   );
 }
 
