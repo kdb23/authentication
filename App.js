@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { AuthProvider } from './components/AuthContext';
 import Login from './components/Login'
 import { DateProvider } from './components/DateContext';
@@ -14,11 +14,9 @@ import { DateProvider } from './components/DateContext';
 
 function App() {
   return (
-    <DateProvider>
-    <AuthProvider >
-        <Login />
-    </AuthProvider>
-    </DateProvider>
+    <SafeAreaView>
+          <Login />   
+    </SafeAreaView>
   );
 }
 
