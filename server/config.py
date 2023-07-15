@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SECRET_KEY'] = b'\x0b\xf2&\xf0\xdd\xe9%\xc0Pg\x07\xe0\xbf`+y'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.json.compact = False
