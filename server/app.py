@@ -1,5 +1,7 @@
 from flask import request, session, make_response
-
+from flask_restful import Resource
+from config import app, db, api
+from models import User
 
 class Home(Resource):
     def get(self):
