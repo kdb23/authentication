@@ -3,28 +3,24 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @format strict-local
  */
 
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import SignInScreen from './src/screens/SignInScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
+import * as React from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { AuthProvider } from './components/AuthContext';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNav from './components/AppNav'
 
-const App = () => {
+
+function App() {
   return (
-    <SafeAreaView style={styles.root}>
-      <SignUpScreen />
-
-    </SafeAreaView>
+    <AuthProvider >
+      <NavigationContainer>
+        <AppNav />
+          <Text>Token Fun</Text>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: '#F9FBFC'
-  },
-});
 
 export default App;
