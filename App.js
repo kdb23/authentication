@@ -14,9 +14,11 @@ import { DateProvider } from './components/DateContext';
 
 function App() {
   return (
-    <SafeAreaView>
+    <DateProvider>
+      <AuthProvider>
           <Login />   
-    </SafeAreaView>
+      </AuthProvider>
+    </DateProvider>
   );
 }
 

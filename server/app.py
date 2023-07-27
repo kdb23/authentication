@@ -25,16 +25,16 @@ class Users(Resource):
             return make_response({'error': 'username is already taken'}, 400)
         if user == None:
             try:
-                almost_user = User(username = data['username'], _password_hash = data['_password_hash'])
-                almost_user.password_hash = almost_user._password_hash
-                hashed_pass = almost_user._password_hash
+                new_user = User(username = data['username'], _password_hash = data['_password_hash'])
+                new_user.password_hash = new_user._password_hash
+                hashed_pass = new_user._password_hash
                 new_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = hashed_pass)
                 db.session.add(new_user)
                 db.session.commit()
 
                 token = jwt.encode({
                     'id': new_user.id,
-                    'exp' : datetime.utcnow() + timedelta(minutes = 30)
+                    'exp' : datetime.utcnow() + timedelta(minutes = 90)
                 }, app.config['SECRET_KEY'])
                 return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict()}, 200)
 
@@ -42,6 +42,38 @@ class Users(Resource):
                 return make_response({'error': 'user input invalid'}, 400)
     
 api.add_resource(Users, '/users')
+
+class UserById(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user == None:
+            return make_response({'error': 'user not found'}, 400)
+        return make_response(user.to_dict())
+    
+    def patch(self, id):
+        data = request.get_json()
+        user = User.query.filter_by(id=id).first()
+
+        if user == None:
+            make_response({'error': 'user not found'}, 400)
+
+        for key in data.keys():
+            setattr(user, key, data[key])
+        db.session.add(user)
+        db.session.commit()
+        return make_response(user.to_dict(), 200)
+
+    def delete(self, id):
+        user = User.query.filter_by(id=id).first()
+
+        if user == None:
+            make_response({'error': 'user not found'}, 400)
+        
+        db.session.delete(user)
+        db.session.commit()
+        return make_response({'succes': 'user deleted'}, 200)
+
+api.add_resource(UserById, '/users/<int:id>')
 
 class Login(Resource):
     def post(self):
