@@ -1,13 +1,10 @@
-import React, {useContext, useEffect, useState } from 'react'
 import { Text, View, Pressable } from 'react-native'
-import { AuthContext } from './AuthContext'
 
 
-function Home(){
-    const {userInfo} = useContext(AuthContext)    
+function Home(){   
     return(
         <View>
-            <Text> {userInfo.first_name}'s HomePage</Text>
+            <Text> HomePage</Text>
         </View>
     )
 }

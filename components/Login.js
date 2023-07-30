@@ -1,8 +1,9 @@
 import { useState, useContext, createContext } from 'react'
 import {SafeAreaView, View, Text, TextInput, TouchableOpacity, Button, StyleSheet, Pressable} from 'react-native'
 import { AuthContext } from "./AuthContext"
+import CreateAccount from './CreateAccount'
 
-function Login() {
+function Login({navigation}) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -22,7 +23,7 @@ function Login() {
                     style={styles.input} value={username} onChangeText={text =>setUsername(text)} autoCapitalize='none'/>
                 <TextInput style={styles.input} secureTextEntry={true}
                     placeholder='Password' value={password} onChangeText={text => setPassword(text)} autoCapitalize='none'/>
-                <Pressable style={styles.button} onPress={()=>{login(email, password, accountValidator)}}>
+                <Pressable style={styles.button} onPress={()=>{login(username, password, accountValidator)}}>
                     <Text style={styles.buttonText}>Login</Text>
                 </Pressable> 
                 <Pressable style={styles.button2} onPress={() => navigation.navigate('Create Account')}>
